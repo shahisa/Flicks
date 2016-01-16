@@ -9,10 +9,11 @@
 import UIKit
 import AFNetworking
 
-class MoviesViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
+class MoviesViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UISearchResultsUpdating {
 
     @IBOutlet weak var tableView: UITableView!
     var refreshControl: UIRefreshControl!
+    var searchController: UISearchController!
     
     
     
@@ -23,6 +24,20 @@ class MoviesViewController: UIViewController, UITableViewDataSource, UITableView
         super.viewDidLoad()
         tableView.dataSource = self
         tableView.delegate = self
+        
+        
+        
+        searchController = UISearchController(searchResultsController: nil)
+        searchController.searchResultsUpdater = self
+        
+        
+        searchController.dimsBackgroundDuringPresentation = false
+        
+        searchController.searchBar.sizeToFit()
+        tableView.tableHeaderView = searchController.searchBar
+        
+        definesPresentationContext = true
+        
 
         let apiKey = "a07e22bc18f5cb106bfe4cc1f83ad8ed"
         let url = NSURL(string:"https://api.themoviedb.org/3/movie/now_playing?api_key=\(apiKey)")
@@ -104,6 +119,16 @@ class MoviesViewController: UIViewController, UITableViewDataSource, UITableView
         delay(2, closure: {
             self.refreshControl.endRefreshing()
         })
+        
+        func updateSearchResultsForSearchController(searchController: UISearchController) {
+            let searchText = searchController.searchBar.text
+            var filteredData:String
+            filteredData = searchText!.isEmpty ? movies : movies!.filter({(movies: NSDictionary) -> Bool in
+                return movies.rangeOfString(searchText, options: .CaseInsensitiveSearch) != nil
+            })
+            
+            tableView.reloadData()
+        }
     }
     
 
