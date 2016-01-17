@@ -9,11 +9,14 @@
 import UIKit
 import AFNetworking
 
-class MoviesViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UISearchResultsUpdating {
+class MoviesViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate{
 
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var searchBar: UISearchBar!
     var refreshControl: UIRefreshControl!
-    var searchController: UISearchController!
+    
+    var filteredData:[NSDictionary]!
+    
     
     
     
@@ -24,19 +27,17 @@ class MoviesViewController: UIViewController, UITableViewDataSource, UITableView
         super.viewDidLoad()
         tableView.dataSource = self
         tableView.delegate = self
+        filteredData = movies
         
+        func searchBar(searchBar: UISearchBar, textDidChange searchText:String){filteredData = searchText.isEmpty ? movies : movies!.filter({(movie: NSDictionary) -> Bool in
+            return title!.rangeOfString(searchText, options: .CaseInsensitiveSearch) != nil
+        })
+            
+            tableView.reloadData()
         
+            
+        }
         
-        searchController = UISearchController(searchResultsController: nil)
-        searchController.searchResultsUpdater = self
-        
-        
-        searchController.dimsBackgroundDuringPresentation = false
-        
-        searchController.searchBar.sizeToFit()
-        tableView.tableHeaderView = searchController.searchBar
-        
-        definesPresentationContext = true
         
 
         let apiKey = "a07e22bc18f5cb106bfe4cc1f83ad8ed"
@@ -82,6 +83,17 @@ class MoviesViewController: UIViewController, UITableViewDataSource, UITableView
         
     }
     
+    func searchBarTextDidBeginEditing(searchBar: UISearchBar) {
+        self.searchBar.showsCancelButton = true
+    }
+    
+    func searchBarCancelButtonClicked(searchBar: UISearchBar) {
+        searchBar.showsCancelButton = false
+        searchBar.text = ""
+        searchBar.resignFirstResponder()
+    }
+
+    
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("MovieCell", forIndexPath: indexPath) as! MovieCell
         
@@ -120,16 +132,7 @@ class MoviesViewController: UIViewController, UITableViewDataSource, UITableView
             self.refreshControl.endRefreshing()
         })
         
-        func updateSearchResultsForSearchController(searchController: UISearchController) {
-            let searchText = searchController.searchBar.text
-            var filteredData:String
-            filteredData = searchText!.isEmpty ? movies : movies!.filter({(movies: NSDictionary) -> Bool in
-                return movies.rangeOfString(searchText, options: .CaseInsensitiveSearch) != nil
-            })
-            
-            tableView.reloadData()
-        }
-    }
+          }
     
 
     /*
