@@ -9,7 +9,7 @@ Flicks is a movies app using the [The Movie Database API](http://docs.themoviedb
 5. User can pull to refresh the movie list.
 
 ## Video Walkthough 
-http://i.imgur.com/hjsP3mM.gif
+<img src = "http://i.imgur.com/hjsP3mM.gif">
 
 ##Notes
 
