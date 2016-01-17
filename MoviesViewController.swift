@@ -15,7 +15,7 @@ class MoviesViewController: UIViewController, UITableViewDataSource, UITableView
     @IBOutlet weak var searchBar: UISearchBar!
     var refreshControl: UIRefreshControl!
     
-    var filteredData:[NSDictionary]!
+    var filteredMovies:[NSDictionary]!
     
     
     
@@ -27,16 +27,9 @@ class MoviesViewController: UIViewController, UITableViewDataSource, UITableView
         super.viewDidLoad()
         tableView.dataSource = self
         tableView.delegate = self
-        filteredData = movies
-        
-        func searchBar(searchBar: UISearchBar, textDidChange searchText:String){filteredData = searchText.isEmpty ? movies : movies!.filter({(movie: NSDictionary) -> Bool in
-            return title!.rangeOfString(searchText, options: .CaseInsensitiveSearch) != nil
-        })
-            
-            tableView.reloadData()
-        
-            
-        }
+        filteredMovies = movies
+      
+       
         
         
 
@@ -58,7 +51,7 @@ class MoviesViewController: UIViewController, UITableViewDataSource, UITableView
                             
                             self.movies = responseDictionary["results"] as! [NSDictionary]
                             self.tableView.reloadData()
-                            
+                             self.filteredMovies = self.movies
                             
                     }
                 }
@@ -69,6 +62,17 @@ class MoviesViewController: UIViewController, UITableViewDataSource, UITableView
         refreshControl.addTarget(self, action: "onRefresh", forControlEvents: UIControlEvents.ValueChanged)
         tableView.insertSubview(refreshControl, atIndex: 0)
     }
+    
+    
+    func searchBar(searchBar: UISearchBar, textDidChange searchText:String){filteredMovies = searchText.isEmpty ? movies : movies!.filter({(movie: NSDictionary) -> Bool in
+        return (movie["title"]as!String).rangeOfString;(searchText, options: .CaseInsensitiveSearch) != nil
+    })
+        
+        tableView.reloadData()
+        
+        
+    }
+    
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
