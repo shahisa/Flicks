@@ -65,7 +65,7 @@ class MoviesViewController: UIViewController, UITableViewDataSource, UITableView
     
     
     func searchBar(searchBar: UISearchBar, textDidChange searchText:String){filteredMovies = searchText.isEmpty ? movies : movies!.filter({(movie: NSDictionary) -> Bool in
-        return (movie["title"]as!String).rangeOfString;(searchText, options: .CaseInsensitiveSearch) != nil
+        return (movie["title"]as!String).rangeOfString(searchText, options: .CaseInsensitiveSearch) != nil
     })
         
         tableView.reloadData()
