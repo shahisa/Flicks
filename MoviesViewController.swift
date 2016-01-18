@@ -13,10 +13,15 @@ class MoviesViewController: UIViewController, UITableViewDataSource, UITableView
 
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var searchBar: UISearchBar!
+    @IBOutlet weak var networkingErrorButton: UIButton!
+    
     var refreshControl: UIRefreshControl!
     
     var filteredMovies:[NSDictionary]!
     
+    @IBAction func hideNetworkError (sender:AnyObject){
+        
+    }
     
     
     
@@ -104,8 +109,9 @@ class MoviesViewController: UIViewController, UITableViewDataSource, UITableView
         let movie = movies![indexPath.row]
         let title = movie["title"] as! String
         let overview = movie["overview"] as! String
-        let posterPath = movie["poster_path"] as! String
         let baseUrl = "http://image.tmdb.org/t/p/w500"
+        let posterPath = movie["poster_path"] as! String
+        
         let imageUrl = NSURL (string: baseUrl + posterPath)
         
         cell.titleLabel.text = title
@@ -139,14 +145,23 @@ class MoviesViewController: UIViewController, UITableViewDataSource, UITableView
           }
     
 
-    /*
+    
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+        let cell = sender as! UITableViewCell
+        let indexPath = tableView.indexPathForCell(cell)
+        let movie = movies![indexPath!.row]
+        
+        let detailViewController = segue.destinationViewController as! DetailViewController
+        detailViewController.movie = movie
+        
+        
+        
+        
+        print("segue called")
     }
-    */
+    
 
 }
