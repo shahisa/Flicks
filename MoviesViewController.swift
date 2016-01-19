@@ -56,8 +56,9 @@ class MoviesViewController: UIViewController, UITableViewDataSource, UITableView
                             NSLog("response: \(responseDictionary)")
                             
                             self.movies = responseDictionary["results"] as! [NSDictionary]
-                            self.tableView.reloadData()
+                           
                              self.filteredMovies = self.movies
+                             self.tableView.reloadData()
                             
                     }
                 }
@@ -72,6 +73,8 @@ class MoviesViewController: UIViewController, UITableViewDataSource, UITableView
     
     func searchBar(searchBar: UISearchBar, textDidChange searchText:String){filteredMovies = searchText.isEmpty ? movies : movies!.filter({(movie: NSDictionary) -> Bool in
         return (movie["title"]as!String).rangeOfString(searchText, options: .CaseInsensitiveSearch) != nil
+        
+        
     })
         
         tableView.reloadData()
@@ -88,6 +91,7 @@ class MoviesViewController: UIViewController, UITableViewDataSource, UITableView
         if let filteredMovies = filteredMovies {
             return filteredMovies.count
         }else{
+            
         return 0
         }
         
