@@ -9,7 +9,7 @@ Flicks is a movies app using the [The Movie Database API](http://docs.themoviedb
 5. User can pull to refresh the movie list.
 
 ## Video Walkthough 
-<img src = "http://i.imgur.com/gyTwl75.gifv">
+<img src = "http://i.imgur.com/gyTwl75.gif">
 
 ##Notes
 I am having trouble with, getting the search bar to actually work and making the searchbar cancel when I press the (x) button and hide the keyboard. I added the fucntions yet it still does not work. 
