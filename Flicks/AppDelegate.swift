@@ -8,6 +8,12 @@
 
 import UIKit
 
+let kReachabilityWithWifi = "Reachable With Wifi"
+let kReachabilityWithWWAN = "Reachable With WWaN"
+let kReachability = "Network Error"
+
+var reachability: Reachability?
+
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate{
 

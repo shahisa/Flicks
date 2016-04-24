@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		7F3D3A821C4D47E00033F417 /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F3D3A811C4D47E00033F417 /* DetailViewController.swift */; };
+		7F560FBF1CCC5B8400D99195 /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 7F560FBE1CCC5B8400D99195 /* Reachability.m */; };
 		7FDD80721C489D8500B0FE5C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FDD80711C489D8500B0FE5C /* AppDelegate.swift */; };
 		7FDD80771C489D8500B0FE5C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7FDD80751C489D8500B0FE5C /* Main.storyboard */; };
 		7FDD80791C489D8500B0FE5C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7FDD80781C489D8500B0FE5C /* Assets.xcassets */; };
@@ -21,6 +22,9 @@
 		34863796E052FB32D537500A /* Pods-Flicks.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Flicks.release.xcconfig"; path = "Pods/Target Support Files/Pods-Flicks/Pods-Flicks.release.xcconfig"; sourceTree = "<group>"; };
 		570BCD90B54CEAF519BD6417 /* Pods_Flicks.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Flicks.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		7F3D3A811C4D47E00033F417 /* DetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
+		7F560FBC1CCC5B8300D99195 /* Flicks-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Flicks-Bridging-Header.h"; sourceTree = "<group>"; };
+		7F560FBD1CCC5B8400D99195 /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
+		7F560FBE1CCC5B8400D99195 /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Reachability.m; sourceTree = "<group>"; };
 		7FDD806E1C489D8500B0FE5C /* Flicks.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Flicks.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7FDD80711C489D8500B0FE5C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		7FDD80761C489D8500B0FE5C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -89,6 +93,9 @@
 				7FDD80781C489D8500B0FE5C /* Assets.xcassets */,
 				7FDD807A1C489D8500B0FE5C /* LaunchScreen.storyboard */,
 				7FDD807D1C489D8500B0FE5C /* Info.plist */,
+				7F560FBD1CCC5B8400D99195 /* Reachability.h */,
+				7F560FBE1CCC5B8400D99195 /* Reachability.m */,
+				7F560FBC1CCC5B8300D99195 /* Flicks-Bridging-Header.h */,
 			);
 			path = Flicks;
 			sourceTree = "<group>";
@@ -139,7 +146,7 @@
 		7FDD80661C489D8500B0FE5C /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastSwiftUpdateCheck = 0720;
+				LastSwiftUpdateCheck = 0730;
 				LastUpgradeCheck = 0720;
 				ORGANIZATIONNAME = "Mobile Shah";
 				TargetAttributes = {
@@ -236,6 +243,7 @@
 				7FDD80841C49493E00B0FE5C /* MoviesViewController.swift in Sources */,
 				7FDD80871C495A5700B0FE5C /* MovieCell.swift in Sources */,
 				7F3D3A821C4D47E00033F417 /* DetailViewController.swift in Sources */,
+				7F560FBF1CCC5B8400D99195 /* Reachability.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -349,10 +357,13 @@
 			baseConfigurationReference = 97438D54A979B890F085E21E /* Pods-Flicks.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				INFOPLIST_FILE = Flicks/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = edu.Morganstate.isaiahcliftonweaver.Flicks;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "Flicks/Flicks-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
 		};
@@ -361,10 +372,12 @@
 			baseConfigurationReference = 34863796E052FB32D537500A /* Pods-Flicks.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				INFOPLIST_FILE = Flicks/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = edu.Morganstate.isaiahcliftonweaver.Flicks;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "Flicks/Flicks-Bridging-Header.h";
 			};
 			name = Release;
 		};

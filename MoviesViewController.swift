@@ -13,7 +13,8 @@ class MoviesViewController: UIViewController, UITableViewDataSource, UITableView
 
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var searchBar: UISearchBar!
-    @IBOutlet weak var networkingErrorButton: UIButton!
+    @IBOutlet weak var displayLabel: UILabel!
+    
     
     var refreshControl: UIRefreshControl!
     
@@ -21,7 +22,10 @@ class MoviesViewController: UIViewController, UITableViewDataSource, UITableView
     var endpoint: String!
     
     
-    @IBAction func hideNetworkError (sender:AnyObject){
+   
+    
+    func reachabilityStatusChanged () {
+       
         
     }
     
